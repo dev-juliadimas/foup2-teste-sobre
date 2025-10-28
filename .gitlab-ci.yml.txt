@@ -1,0 +1,35 @@
+# Arquivo: .gitlab-ci.yml (Deve estar na RAIZ do seu repositório)
+
+# Define a imagem Docker a ser usada na execução. 
+# A imagem 'busybox' é leve e suficiente para copiar arquivos estáticos.
+image: busybox
+
+# Define o "Job" (Tarefa) responsável pela implantação no Pages
+pages:
+  # Define o estágio da pipeline onde este job será executado
+  stage: deploy
+  
+  # Os comandos que o GitLab Runner deve executar:
+  script:
+    # 1. Cria a pasta 'public'. O GitLab Pages EXIGE que os arquivos
+    #    a serem publicados estejam dentro de uma pasta chamada 'public'.
+    - mkdir public
+    
+    # 2. Copia todos os arquivos do seu repositório (HTML, CSS, JS, fotos, etc.)
+    #    para dentro da pasta 'public'.
+    - cp -r * public/
+    
+    # 3. Garante que os arquivos ocultos (como .htaccess, se houver) sejam copiados
+    - cp -r . public/
+
+  # Define os "artifacts" (artefatos) que o job irá gerar.
+  # O GitLab Pages precisa que a pasta 'public' seja o artefato de saída.
+  artifacts:
+    paths:
+      - public # O GitLab Pages publica tudo que estiver nesta pasta.
+  
+  # Regras que definem quando este job deve rodar.
+  rules:
+    # O job de páginas só rodará quando houver um commit no branch 'main' 
+    # ou 'master' (depende do nome do seu branch principal).
+    - if: $CI_COMMIT_REF_NAME == $CI_DEFAULT_BRANCH
