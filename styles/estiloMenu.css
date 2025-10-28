@@ -1,0 +1,77 @@
+@import url(estGeral.css);
+
+#mainNav:not(.scrolled) {
+background-color: transparent !important; 
+    box-shadow: none !important;
+    z-index: 1030; /* Garante que a barra fique por cima */
+}
+
+/* Estilo dos Links no Estado Transparente (Home) */
+#mainNav:not(.scrolled) .nav-link {
+    color: var(--cor-branco) !important;
+}
+
+.navbar.scrolled {
+    background-color: var(--cor-azul-escuro) !important; /* Azul Escuro Sólido */
+    box-shadow: 0 2px 6px var(--cor-preto);
+}
+
+/* Estilo dos Links e Logo no Estado Sólido (scrolled) */
+.navbar.scrolled .nav-link,
+.navbar.scrolled .navbar-brand {
+    color: var(--cor-branco) !important; /* Mantém links brancos */
+}
+
+/* Destaque do Link Ativo (Amarelo/Warning) */
+.nav-link.text-warning {
+    color: var(--cor-laranja) !important;
+}
+
+.navbar {
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.navbar-nav .nav-link {
+  color: var(--cor-branco) !important;
+}
+
+#sidebar {
+  position: fixed;
+  top: 0;
+  left: -300px;
+  width: 300px;
+  height: 100%;
+  background-color: var(--cor-branco);
+  padding: 20px;
+  box-shadow: 2px 0 12px var(--cor-azul-escuro);
+  transition: left 0.4s ease, opacity 0.4s ease;
+  opacity: 0;
+  z-index: 1050;
+}
+
+#sidebar.active {
+  left: 0;
+  opacity: 1;
+}
+
+#overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: var(--cor-azul-escuro);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.4s ease, visibility 0.4s ease;
+  z-index: 1040;
+}
+
+#overlay.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.btn{
+    background: var(--cor-laranja);
+}
